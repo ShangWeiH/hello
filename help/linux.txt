@@ -1,0 +1,17 @@
+cat pic_pc.err.log.2020-10-21_11 | grep ",cost=[8-9][0-9][0-9]"
+
+
+lsb_release -a
+
+LSB Version:	:base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
+Distributor ID:	RedHatEnterpriseServer
+Description:	Red Hat Enterprise Linux Server release 6.6 (Santiago)
+Release:	6.6
+Codename:	Santiago
+
+
+
+cat /etc/issue
+
+Red Hat Enterprise Linux Server release 6.6 (Santiago)
+Kernel \r on an \m

@@ -1,0 +1,27 @@
+//tomcat   port:8080    url:localhost:8080
+
+cd
+cd Library/tomcat/bin
+sudo sh startup.sh
+sudo sh shutdown.sh
+
+---------------------------------------------------------------------
+
+//nginx   port:80    url:localhost:80
+
+cd /usr/local/etc/nginx
+
+cd /usr/local/var/www
+
+
+cd /usr/local/etc/nginx/conf.d
+
+sudo vim default.conf
+//insert
+//esc exit insert
+//  :wq   :q!
+
+
+sudo brew services start nginx
+sudo brew services stop nginx
+sudo brew services restart nginx

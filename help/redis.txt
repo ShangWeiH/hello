@@ -1,0 +1,31 @@
+[@hbhly_60_147 ~]# redis-cli -h 10.152.227.46 -p 1980
+				   redis-cli -h a.redis.sogou -p 1980
+				   redis-cli -h k.redis.sogou -p 1545
+
+redis-cli -h pic.pic.ms.redis.sogou -p 1545
+
+redis-cli -h g.redis.sogou -p 2099
+
+redis-cli -h pic.picgo.ms.redis.sogou -p 1772
+
+redis-cli -h g.redis.sogou -p 2099
+
+
+10.152.227.46:1980> auth m6i1m2a3
+auth m6i1m2a3m6i1m2a3
+OK
+10.152.227.46:1980> ping
+PONG
+10.152.227.46:1980> 
+
+
+
+
+redis-cli -h pic.pic.ms.redis.sogou -p 1545 -n 2    (select 2)
+auth m6i1m2a3m6i1m2a3
+ping
+zrange gif_home_group_result 1 -1
+zrange feed_meinv_recom_result 1 -1
+
+llen —Ó√›
+lrange —Ó√› 0 10

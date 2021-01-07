@@ -1,0 +1,47 @@
+mysqldump -h10.160.44.203 -p3306 -umyuser -pmypassword --all-databases --force --skip-lock-tables > all_db_all.sql
+mysqldump -uroot -pmypassword --all-databases --force > all_db.sql
+mysql> source all_db.sql;
+
+Ä@hbhly_44_203 binÅ# ps -ef|grep mysql
+root     14103     1  0 Feb06 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/search/mysqldata/mysql --socket=/search/mysqldata/mysql/mysql.sock --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --user=mysql
+mysql    14150 14103 80 Feb06 ?        36-03:36:27 /usr/libexec/mysqld --basedir=/usr --datadir=/search/mysqldata/mysql --user=mysql --pid-file=/var/run/mysqld/mysqld.pid --skip-external-locking --socket=/search/mysqldata/mysql/mysql.sock
+root     26589 32627  0 12:02 ?        00:00:00 mysql -h10.160.44.203 -umyuser -px xxxxxxxx stats -N -e select title,pv from pic_wap_vr_query  WHERE date='20200321' ORDER BY     pv DESC 
+root     31093 14758  0 12:21 pts/1    00:00:00 grep mysql
+
+
+
+Ä@hbhly_44_203 binÅ# whereis mysql
+mysql: /usr/bin/mysql /usr/lib/mysql /usr/share/mysql /usr/share/man/man1/mysql.1.gz
+
+
+
+mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+tar -xvf mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz  -C  /usr/local/localsoftware/mysql/mysql-install-location
+
+
+chown -R mysql:mysql  /usr/local/localsoftware/mysql/mysql-install-location/mysql-8.0.19-linux-glibc2.12-x86_64
+
+
+chown -R mysql  /usr/local/localsoftware/mysql/mysql-install-location/mysql-8.0.19-linux-glibc2.12-x86_64/
+chmod -R 755 /usr/local/localsoftware/mysql/mysql-install-location/mysql-8.0.19-linux-glibc2.12-x86_64/
+
+
+
+mysqld --user=mysql --basedir=/usr/local/localsoftware/mysql/mysql-install-location/mysql-8.0.19-linux-glibc2.12-x86_64 --datadir=/usr/local/localsoftware/mysql/mysql-data-location --initialize
+
+
+
+dbma-cli-single-instance --pkg=mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz --port=3306 --max-mem=256 install
+
+
+ln -s /usr/local/localsoftware/mysql/mysql-install-location/mysql-8.0.19-linux-glibc2.12-x86_64/bin/mysqld mysqld
+ln -s /usr/local/localsoftware/mysql/mysql-install-location/mysql-8.0.19-linux-glibc2.12-x86_64/mysql.sock /tmp/mysql.sock
+
+
+
+./mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --pid-file=/usr/local/localsoftware/mysql/mysql-data-location/mysql.pid --tmpdir=/tmp
+
+
+
+
+

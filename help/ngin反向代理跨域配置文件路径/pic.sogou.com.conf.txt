@@ -1,0 +1,290 @@
+upstream pic_anti {
+	server antispider01.pic.tc.ted;
+	server antispider02.pic.tc.ted;
+	ip_hash;
+}
+
+upstream pic_resin_ris {
+	server 127.0.0.1:6804;
+        upstream_limit max_retries=1;
+        keepalive 20;
+}
+
+upstream pic_resin_search {
+        server 127.0.0.1:6802;
+	upstream_limit max_retries=2;
+	keepalive 20;
+}
+
+upstream pic_resin_search_picwap {
+	server 127.0.0.1:6803;
+        upstream_limit max_retries=1;
+        keepalive 20;
+}
+
+upstream pic_ocr {
+	server gpu13.dl.nm.ted:9032;
+	server gpu14.dl.nm.ted:9032;
+	server gpu15.dl.nm.ted:9032;
+	server gpu16.dl.nm.ted:9032;
+        upstream_limit max_retries=1;
+        keepalive 20;
+}
+
+upstream pic_sugg {
+        server sugg01.pic.tc.ted;
+        server sugg02.pic.tc.ted;
+        upstream_limit max_retries=1;
+        keepalive 20;
+}
+
+
+random_generate $pic_abtest {
+	30%  1;
+	*    0;
+}
+#antispider_zone zone_pic 2m;
+
+ antispider_new_zone 'new_share' 100m;
+ antispider_new_zone_info 'new_share' 'ban_ip' 'ban_cookie';
+
+server {
+	listen 80  deferred so_keepalive=on;
+
+	server_name pic.sogou.com image.sogou.com *.sogou-op.org image.soso.com pic.soso.com picture.soso.com bq.soso.com img.soso.com tp.soso.com photo.soso.com tupian.soso.com face.soso.com images.soso.com www.sogou.com tu.pic.sogou.com pic.sogou.com.inner tu.pic.sogou.com.inner image.sogou.com.inner image.soso.com.inner pic.soso.com.inner picture.soso.com.inner bq.soso.com.inner img.soso.com.inner tp.soso.com.inner photo.soso.com.inner tupian.soso.com.inner face.soso.com.inner images.soso.com.inner biaoqing.soso.com.inner qqbiaoqing.soso.com.inner qqbq.soso.com.inner qqface.soso.com.inner qqimage.soso.com.inner pic.sogou.com.sctp.sogou *.sogou *.inner *.ted devpic.sogou.com 10.134.116.160;
+
+	root /search/odin/nginx/html/nginx_pic/bin;
+
+	error_page 404 500 504	/error/error.html;
+
+        hmux_next_upstream error timeout http_500 http_503;
+
+	gzip on;
+
+	uuid_set uuid nolog;
+
+#	antispider_protect zone_pic;
+#        antispider_udplog anti01.pic.djt.vm.ted:40063 pic;
+#        antispider_pattern ^/(pics|d|pics/pics|pics/d|dl)$;
+        antispider_cookie SSUID expires=20y domain=pic.sogou.com p3p=off;
+
+	suv_cookie SUV expires=20y domain=.sogou.com;
+	abtest_cookie ABTEST $pic_abtest expires=1m p3p=off version=v1;
+
+######## new anti conf ######
+######## ban stratagy #######
+# antispider_ban_flag 
+# 0 non-anti and log only;
+# 1 based on cookie;
+# 2 based on IP;
+# 3 both cookie and IP;
+#############################
+    antispider_cookie_time 3 15;
+    antispider_new_protect new_share;
+    antispider_new_udplog antispider01.pic.tc.ted:40063 pic;
+    antispider_new_pattern ^(/d|/pics|/pics/newxmlvr.jsp|/pics/pics|/pics/qqskin|/pics/rss.jsp|/pics/vr|/pics/xml.jsp|/ris|/xml)$;
+    antispider_new_cookie SNUID expires=10d p3p=off;
+    antispider_new_warn_delay 3600;
+    antispider_suv_flag 1 0;
+    antispider_ban_flag 3;
+
+####### soso rewrite #######
+
+        if ( $host ~ ^(.*.soso.com) ){
+		rewrite ^/image\.cgi?$ /pics/pics?query=$arg_w? permanent;
+                rewrite ^/(.*)$ $scheme://pic.sogou.com/$1 redirect;
+        }
+
+############################
+
+	rewrite ^/(pics|d|web|websearch\.do|pics/websearch\.do|websearch/websearch\.do)$ /pics/pics last;
+        rewrite ^/ris$ /ris/ris last;
+        rewrite ^/ris_upload$ /ris/upload_pic.jsp last;
+        rewrite ^/dl$ /pics/download.jsp last;
+        rewrite ^/xml$ /pics/xml.jsp last;
+        rewrite ^/su$ /pics/imaged.jsp last;
+	rewrite ^/(xmlquery|download|rss)\.jsp$ /pics/$1.jsp last;
+        #rewrite ^/xunren*$ http://10.10.66.36/pics/pics last;
+        #rewrite ^/imgcate/d/([^/]+)/(.*)\.html$ /pics/pics?query=$2&cateid=$1 last;
+        rewrite ^/cate/(.*).html /imgcate/b2.html redirect;
+
+        rewrite ^/pics/pics$ /pics redirect;
+        rewrite ^/pics/d$ /d redirect;
+
+	rewrite ^(.*)/.svn/ / redirect;
+        #error_page 502 503 504 =301 @resin_bk;
+
+	location = /h5apps/jskit.sohu.com/killad.min.js {
+		return 403;
+	}
+
+	location = /mttReplaceState {
+                return 403;
+        }
+
+	location = /pics/recompic/null {
+                return 403;
+        }
+
+	location = /pic/undefined {
+                return 403;
+        }
+
+	location = /null {
+                return 403;
+        }
+
+	location ~ ^/flash/PicDetail/[0-9]+$ {
+                return 403;
+        }
+
+        location /sugg/ {
+		proxy_pass http://pic_sugg;
+                proxy_set_header Host $host;
+                proxy_set_header Connection "";
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+
+        #location @resin_bk
+        #  {
+        #    hmux_pass hmux://resin_backup;  
+        #  }
+	location ^~ /pics {
+		hmux_pass hmux://pic_resin_search;
+		#hmux_buffering off;
+
+                expires 0;
+                if_modified_since off;
+	}
+
+	location ^~ /ris {
+		hmux_pass hmux://pic_resin_ris;
+		#hmux_buffering off;
+
+		hmux_read_timeout 11s;
+
+		hmux_next_upstream error;
+
+                expires 0;
+                if_modified_since off;
+	}
+
+	location ~ /imgcate/d/(?<cap1>[^/]+)/(?<cap2>.*)\.html$ {
+		# use location here to disable arg escape
+		rewrite ^.*$ /pics/pics?query=$cap2&cateid=$cap1 last;
+	}
+
+	location ~ \.(gif|jpeg|jpg|ico|css|js|swf|flv)$ {
+		expires 7d;
+
+		access_log off;
+	}
+
+	location ^~ /antispider {
+		rewrite ^(.*)$ /pic$1 break;
+		proxy_pass http://pic_anti;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+
+	location ~ \.(html|htm) {
+		expires 30;
+	}
+
+	location = /server-status {
+		stub_status on;
+		allow 10.0.0.0/8;
+		allow 127.0.0.1;
+		deny all;
+
+		access_log off;
+	}
+
+	location = /m-server-status {
+		return 200 "OK";
+	}
+
+	location = /caucho-status {
+		upstream_status_show on;
+                allow 127.0.0.1;
+                allow 10.0.0.0/8;
+                deny all;
+	}
+
+	location = /img/fav.ico {
+		return 204;
+	}
+	location /req-status {
+           req_status_show on;
+           allow 10.0.0.0/8;
+           allow 127.0.0.1/32;
+           deny all;
+        }
+
+## index logic (IE rewrite)	
+	location = / {
+                if ($http_user_agent ~* (Android|iPhone|Blackberry|ipod|ophone|symbian|symbos|windows\sphone|WindowsMobile|Windows\sMobile|windows\sce)) {
+                        rewrite ^/$ http://pic.sogou.com/pic/index.jsp?v=5 redirect;
+                }
+
+
+#                if ( $http_user_agent !~ MSIE){
+
+                        rewrite ^/(.*)$ /pics/home.jsp break;
+                        hmux_pass hmux://pic_resin_search;
+
+#                }
+#                        rewrite ^/(.*)$ /index.html break;
+
+       }
+
+## wap ͼƬ ###
+  #??ҳ
+	rewrite ^/pic/$ /pic/index.jsp redirect;
+
+	location /pic/ {
+
+		set $flag 0;
+
+		valid_referers none blocked www.baidu.com;
+		if ($invalid_referer) {
+			set $flag 1;
+		}
+		if ($http_user_agent ~* "iphone") {
+			set $flag "${flag}1";
+		}
+		if ($remote_addr ~ "208.109.101.20" ) {
+			set $flag "${flag}2";
+		}
+		if ($flag = "012") {
+			return 403;
+		}
+
+		hmux_pass hmux://pic_resin_search_picwap;
+	}
+
+	location /ocr {
+		proxy_read_timeout 60s;
+		rewrite ^/ocr$ /v2/ocr/json break;
+		proxy_pass http://pic_ocr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+	
+	location ^~ /srf_querys/ {
+		types {}
+		default_type application/octet-stream;
+	}
+location ~ /fanyi_ocr/v1/ {
+                proxy_read_timeout 60s;
+                rewrite ^/resource/pic/ocr/* /v1/ocr_translate.json break;
+                proxy_pass http://10.143.52.35:3001;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       } 
+}

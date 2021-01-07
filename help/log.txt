@@ -1,0 +1,106 @@
+find -name "pico-pic-out-2__2020-08-0*" | xargs rm -f
+cd /home/picgo/.pm2/logs
+
+
+
+find -name "picgo-pic-out-2__2020-07*" | xargs rm -f
+
+
+find -name "picgo-pic-out-18__2020-09*" | xargs rm -f
+find -name "picgo-pic-out-19__2020-09*" | xargs rm -f
+find -name "picgo-pic-out-20__2020-09*" | xargs rm -f
+find -name "picgo-pic-out-21__2020-09*" | xargs rm -f
+
+find -name "picgo-pic-out-18__2020-10-1*" | xargs rm -f
+find -name "picgo-pic-out-19__2020-10-1*" | xargs rm -f
+find -name "picgo-pic-out-20__2020-10-1*" | xargs rm -f
+find -name "picgo-pic-out-21__2020-10-1*" | xargs rm -f
+
+find -name "picgo-pic-out-18__2020-10-2*" | xargs rm -f
+find -name "picgo-pic-out-19__2020-10-2*" | xargs rm -f
+find -name "picgo-pic-out-20__2020-10-2*" | xargs rm -f
+find -name "picgo-pic-out-21__2020-10-2*" | xargs rm -f
+
+find -name "picgo-pic-out-18__2020-10-3*" | xargs rm -f
+find -name "picgo-pic-out-19__2020-10-3*" | xargs rm -f
+find -name "picgo-pic-out-20__2020-10-3*" | xargs rm -f
+find -name "picgo-pic-out-21__2020-10-3*" | xargs rm -f
+
+find -name "picgo-pic-out-18__2020-11-0*" | xargs rm -f
+find -name "picgo-pic-out-19__2020-11-0*" | xargs rm -f
+find -name "picgo-pic-out-20__2020-11-0*" | xargs rm -f
+find -name "picgo-pic-out-21__2020-11-0*" | xargs rm -f
+
+find -name "picgo-pic-out-18__2020-10-05*" | xargs rm -f
+find -name "picgo-pic-out-19__2020-10-05*" | xargs rm -f
+find -name "picgo-pic-out-20__2020-10-05*" | xargs rm -f
+find -name "picgo-pic-out-21__2020-10-05*" | xargs rm -f
+find -name "picgo-pic-out-18__2020-10-06*" | xargs rm -f
+find -name "picgo-pic-out-19__2020-10-06*" | xargs rm -f
+find -name "picgo-pic-out-20__2020-10-06*" | xargs rm -f
+find -name "picgo-pic-out-21__2020-10-06*" | xargs rm -f
+
+
+
+find -name "picgo-pic-out-2__2020-09*" | xargs rm -f
+find -name "picgo-pic-out-3__2020-09*" | xargs rm -f
+find -name "picgo-pic-out-4__2020-09*" | xargs rm -f
+find -name "picgo-pic-out-5__2020-09*" | xargs rm -f
+
+find -name "picgo-pic-out-2__2020-10-0*" | xargs rm -f
+find -name "picgo-pic-out-3__2020-10-0*" | xargs rm -f
+find -name "picgo-pic-out-4__2020-10-0*" | xargs rm -f
+find -name "picgo-pic-out-5__2020-10-0*" | xargs rm -f
+
+find -name "picgo-pic-out-6__2020-10-0*" | xargs rm -f
+find -name "picgo-pic-out-7__2020-10-0*" | xargs rm -f
+find -name "picgo-pic-out-8__2020-10-0*" | xargs rm -f
+find -name "picgo-pic-out-9__2020-10-0*" | xargs rm -f
+
+find -name "picgo-pic-out-2__2020-09-1*" | xargs rm -f
+find -name "picgo-pic-out-3__2020-09-1*" | xargs rm -f
+find -name "picgo-pic-out-4__2020-09-1*" | xargs rm -f
+find -name "picgo-pic-out-5__2020-09-1*" | xargs rm -f
+
+
+
+
+find -name "picgo-pic-out-6__2020-10*" | xargs rm -f
+find -name "picgo-pic-out-7__2020-10*" | xargs rm -f
+find -name "picgo-pic-out-8__2020-10*" | xargs rm -f
+find -name "picgo-pic-out-9__2020-10*" | xargs rm -f
+
+find -name "picgo-pic-out-6__2020-11-0*" | xargs rm -f
+find -name "picgo-pic-out-7__2020-11-0*" | xargs rm -f
+find -name "picgo-pic-out-8__2020-11-0*" | xargs rm -f
+find -name "picgo-pic-out-9__2020-11-0*" | xargs rm -f
+
+find -name "picgo-pic-out-6__2020-09-1*" | xargs rm -f
+find -name "picgo-pic-out-7__2020-09-1*" | xargs rm -f
+find -name "picgo-pic-out-8__2020-09-1*" | xargs rm -f
+find -name "picgo-pic-out-9__2020-09-1*" | xargs rm -f
+
+
+
+find -name "picgo-pic-out-2*" | xargs rm -f
+find -name "picgo-pic-out-3*" | xargs rm -f
+find -name "picgo-pic-out-4*" | xargs rm -f
+find -name "picgo-pic-out-5*" | xargs rm -f
+
+
+
+
+
+
+ps -ef
+lsof | grep deleted
+
+
+ps aux | grep logstash
+
+logstash启动命令以及参数说明
+命令：./bin/logstash -f config/logstashConf.conf &
+logstashConf.conf 代表需要启动的配置文件名字
+config/logstashConf.conf 代表需要启动的配置文件路径
+-f 代表指定文件路径
+& 代表后台启动

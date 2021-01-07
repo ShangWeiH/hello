@@ -1,0 +1,30 @@
+确认一下/bin目录是否有node和npm文件
+
+建立软连接，变为全局
+ln -s /search/odin/shangwei/node-v10.16.0-linux-x64/bin/node /usr/local/bin/
+ll /usr/local/bin/node
+
+ln -s /search/odin/shangwei/node-v10.16.0-linux-x64/bin/npm /usr/local/bin/
+ll /usr/local/bin/npm
+
+nmp 和 node 命令成为全局后安装mysql
+
+npm install mysql --save
+npm install mysql -g
+
+之后执行node代码连接数据库报错一个：
+Error: ER_HANDSHAKE_ERROR: Bad handshake
+
+这个原因好像是node暂不支持最新版mysql对密码的加密方式，
+降低下mysql版本即可
+
+npm install mysql@2.0 --save
+npm install mysql@2.0 -g
+
+
+
+
+
+///////
+
+ln -s /search/odin/shangwei /search/

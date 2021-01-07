@@ -1,0 +1,10 @@
+lsof -i
+
+lsof -i:10899
+
+AppledeMacBook-Pro-3:picgo-pic apple$ lsof -i:10899
+COMMAND   PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+node    23787 apple   25u  IPv6 0xb269388e6c8a3cc1      0t0  TCP *:10899 (LISTEN)
+AppledeMacBook-Pro-3:picgo-pic apple$ kill -9 23787
+AppledeMacBook-Pro-3:picgo-pic apple$ npm run dev
+

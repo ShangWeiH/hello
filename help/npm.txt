@@ -1,0 +1,16 @@
+npm config ls -l
+
+npm config list
+
+
+npm list sharp
+npm list
+
+
+npm config set sharp_binary_host "https://npm.taobao.org/mirrors/sharp"
+npm config delete sharp_dist_base_url
+
+npm search sharp
+
+
+npm cache clear可以清空NPM本地缓存

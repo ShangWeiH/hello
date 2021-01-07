@@ -1,0 +1,167 @@
+sudo su -
+106772
+
+
+yes
+noSafeNoWork@2017
+
+
+exit
+exit
+
+
+启动，停止，重启resin     desktop/mobile
+service resin_pic start/stop/restartservice resin_picwap start/stop/restart
+
+
+500 Servlet Exception
+更改虚拟机权限
+进入bin目录 /search/odin/resin_picwap/bin
+chown odin:odin *
+chown -R odin:odin *
+然后重启resin
+
+
+500 Servlet Exception
+删除jdk 再次build path 重现添加一次解决
+
+/search/odin/resin_ris/bin/WEB-INF/ 目录下
+classes  tmp  目录为空 重启前删除 重启后自动生成  work目录刷新网页页面后自动生产成
+（重启前 更改bin/目录下文件权限为 odin）
+
+
+
+
+
+机器ip：10.144.116.160
+登录用户名：root   密码：noSafeNoWork@2017
+ 
+这个机器搭好了一套开发环境，有一个nginx和三个resin
+Nginx代码位置：/search/odin/nginx/html/nginx_pic/bin
+Resin_pc代码位置：/search/odin/resin_pic/bin
+Resin_pcwap（也就是无线resin）代码位置：/search/odin/resin_picwap/bin
+Resin_ris（识图resin）代码位置：/search/odin/resin_ris/bin
+ 
+pc页面访问地址：http://10.134.116.160/
+无线页面访问地址：http://10.134.116.160/pic/index.jsp?v=5
+ 
+一般我们这边开发习惯都是在自己电脑上改完某个文件，然后拖到虚机上对应的位置替换原来的文件，win平台上一般用WinSCP。静态文件（html,css,js,图片）直接替换就生效，jsp也是直接替换就生效，src下的java代码需要打个jar包替换linux上的jar，然后重启resin才能生效。
+
+
+
+
+
+
+登录预发布机器  pre.pic.tc.ted
+
+先登录中控 10.143.239.150
+
+ssh shangwei@10.143.239.150
+
+1135h5789y2hY
+
+再   ssh pre.pic.hb.ted   （没密码）
+
+ssh searchhub01.pic.tc.ted
+
+ssh nginx01.pic.tc.ted   线上nginx
+ssh nginx001.pic.gd.ted
+ssh nginx001.pic.tc.ted
+ssh nginx01.pic.hb.ted
+
+ssh nginx01.riscbir.js.ted
+ssh cache01.pic.hb.ted   线上图片resin
+ssh cache01.riscbir.js.ted   线上识图resin
+
+
+ssh shangwei@omg.sec.sogou
+ssh 10.162.133.32    	dev01.pic.hb.ted
+
+
+//拷贝虚机文件到另一台虚机
+/search/odin/resin_pic/data/base
+rsync ubs_black_pic_special_checked root@10.160.60.147:/search/odin/resin_pic/data/base/
+
+//拷贝虚机文件到本地桌面
+rsync root@10.134.116.160:/search/shangwei/java_work/export_ad_pv_url/data/20200206.txt /Users/apple/Desktop/
+
+
+
+/usr/bin/rsync --daemon --config=/etc/rsyncd.conf
+启动rsync服务
+rsync -avP 10.160.60.147::search/shangwei/java_work/export_ad_pv_url/data/
+
+
+
+
+linux上nginx版本查看
+cd /usr/local/nginx/sbin
+./nginx -v   显示 nginx 的版本
+./nginx -V    显示 nginx 的版本，编译器版本和配置参数
+
+
+
+
+10.152.33.147 --- js晨曦10.144.101.218 --- 统计数据库、评测平台数据库等10.134.79.194 --- 评测平台、编辑平台10.144.105.16710.134.14.194---我的虚机
+
+
+
+pinback日志存储地址
+江苏晨曦客户端：装有hadoop服务
+10.152.33.147    noSafeNoWork@2018
+
+hadoop fs -ls /cloud/public/uigs
+
+/cloud/public/uigs/pic和/cloud/public/uigs/wap_pic
+
+http://rsync.master002.sunshine.hadoop.js.ted:50070/explorer.html#/cloud/public/uigs
+
+
+
+mysql  10.160.44.203
+scl enable rh-mysql57 -- bash
+
+
+
+
+
+[@hbhly_44_203 /]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G   19G  305M  99% /
+devtmpfs         12G     0   12G   0% /dev
+tmpfs            12G   32K   12G   1% /tmp
+tmpfs            12G  802M   11G   7% /run
+tmpfs            12G     0   12G   0% /sys/fs/cgroup
+/dev/vdb        1.5T  1.2T  249G  83% /search/odin
+tmpfs           2.4G     0  2.4G   0% /run/user/0
+
+
+df -h
+du -sh *
+
+#环境变量
+env
+cat /etc/profile
+source /etc/profile
+
+
+
+service crond status
+
+
+grep -w 端口号 /etc/services
+
+
+
+su pic-go
+pm2 -v
+
+
+
+44.203
+/var/opt/rh/rh-mysql57/log/mysql/mysqld.log
+
+
+
+docker exec pic_wap pm2 list
+docker exec pic_wap pm2 reload all

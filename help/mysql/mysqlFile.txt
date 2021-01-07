@@ -1,0 +1,33 @@
+du -s * | sort -nr
+du -sh * | grep 'G' | sort -nr
+
+
+
+delete from pic_wap_vr_query where date<20191201;
+delete from pic_searchlist_ctr_wap where date<20191201;
+select date from pic_searchlist_ctr_pc_statsdata order by date asc limit 1;
+
+select * from pic_loading_img_info where date=20191201 limit 1;
+
+optimize table wap_pic_user_record;
+
+
+pic_wap_vr_query   delete
+pic_shitu_word_show_pc
+pic_shitu_word_result_new
+pic_searchlist_ctr_wap_statsdata
+pic_searchlist_ctr_wap
+pic_searchlist_ctr_pc
+pic_searchlist_ctr_pc_statsdata   +
+pic_result_word_search
+wap_pic_user_record  +
+wap_pic_search_query
+wap_pic_searchlist_ad_stat_buz
+wap_pic_searchdownload_pic_download
+wap_pic_searchdownload_downloadpic_stats
+wap_pic_search_download_2019_v2_detail_query_stats     +
+wap_pic_search_download_2019_from_relatepic_query_stats
+wap_pic_search_download_2019_detail_query_stats
+wap_pic_download_ad_stat_buz
+wap_pic_access_queryword   delete
+ris_node_showTime

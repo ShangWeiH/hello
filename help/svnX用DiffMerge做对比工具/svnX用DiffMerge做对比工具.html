@@ -1,0 +1,927 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0069)https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><iframe sandbox="allow-scripts allow-same-origin" id="147fb60d309e526" frameborder="0" allowtransparency="true" marginheight="0" marginwidth="0" width="0" hspace="0" vspace="0" height="0" style="height:0px;width:0px;display:none;" scrolling="no" src="./svnX用DiffMerge做对比工具_files/async_usersync.html">
+    </iframe>
+		
+		<title>Integrating DiffMerge with svnX  | Welcome to Mobile World !!!</title>
+		<link rel="pingback" href="https://mobworld.wordpress.com/xmlrpc.php">
+		<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://s.pubmine.com/">
+<link rel="dns-prefetch" href="https://x.bidswitch.net/">
+<link rel="dns-prefetch" href="https://static.criteo.net/">
+<link rel="dns-prefetch" href="https://ib.adnxs.com/">
+<link rel="dns-prefetch" href="https://aax.amazon-adsystem.com/">
+<link rel="dns-prefetch" href="https://bidder.criteo.com/">
+<link rel="dns-prefetch" href="https://cas.criteo.com/">
+<link rel="dns-prefetch" href="https://gum.criteo.com/">
+<link rel="dns-prefetch" href="https://ads.pubmatic.com/">
+<link rel="dns-prefetch" href="https://gads.pubmatic.com/">
+<link rel="dns-prefetch" href="https://tpc.googlesyndication.com/">
+<link rel="dns-prefetch" href="https://ad.doubleclick.net/">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net/">
+<link rel="dns-prefetch" href="https://www.googletagservices.com/">
+<link rel="dns-prefetch" href="https://cdn.switchadhub.com/">
+<link rel="dns-prefetch" href="https://delivery.g.switchadhub.com/">
+<link rel="dns-prefetch" href="https://delivery.swid.switchadhub.com/">
+<link rel="alternate" type="application/rss+xml" title="Welcome to Mobile World !!! » Feed" href="https://mobworld.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Welcome to Mobile World !!! » Comments Feed" href="https://mobworld.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Welcome to Mobile World !!! » Integrating DiffMerge with svnX Comments Feed" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/feed/">
+	<script src="./svnX用DiffMerge做对比工具_files/client.js" async="" type="text/javascript"></script><script type="text/javascript" async="" src="./svnX用DiffMerge做对比工具_files/recaptcha__en.js"></script><script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1516999477h&ver=4.9.7"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./svnX用DiffMerge做对比工具_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./svnX用DiffMerge做对比工具_files/saved_resource(1)" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-1-1" href="./svnX用DiffMerge做对比工具_files/print.css" type="text/css" media="print">
+<!--[if IE]>
+<link rel='stylesheet' id='notepad-ie-css'  href='https://s2.wp.com/wp-content/themes/pub/notepad/ie.css?m=1273001598h&#038;ver=4.9.7' type='text/css' media='all' />
+<![endif]-->
+<!--[if lte IE 6]>
+<link rel='stylesheet' id='notepad-ie6-css'  href='https://s2.wp.com/wp-content/themes/pub/notepad/ie6.css?m=1273001598h&#038;ver=4.9.7' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="all-css-6-1" href="./svnX用DiffMerge做对比工具_files/saved_resource(2)" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/saved_resource(3)"></script>
+<link rel="stylesheet" id="all-css-0-2" href="./svnX用DiffMerge做对比工具_files/style(1).css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://mobworld.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Connecting to VPN from Mac OSX" href="https://mobworld.wordpress.com/2012/03/20/connecting-to-vpn-from-mac-osx/">
+<link rel="next" title="Native App development is here to stay" href="https://mobworld.wordpress.com/2012/08/26/native-vs-html5-web-app/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/">
+<link rel="shortlink" href="https://wp.me/pSWy5-ix">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Integrating DiffMerge with svnX">
+<meta property="og:url" content="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/">
+<meta property="og:description" content="After mentioning the DiffMerge as the  Diff Application in svnX preferences, I was receiving the below error message each time I tried to use the DiffMerge from SVNx. The DiffMerge application was …">
+<meta property="article:published_time" content="2012-05-08T09:39:42+00:00">
+<meta property="article:modified_time" content="2012-05-08T09:47:07+00:00">
+<meta property="og:site_name" content="Welcome to Mobile World !!!">
+<meta property="og:image" content="https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png">
+<meta property="og:image:width" content="427">
+<meta property="og:image:height" content="210">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:text:title" content="Integrating DiffMerge with svnX">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="shortcut icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s2.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://mobworld.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://mobworld.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://mobworld.wordpress.com/osd.xml" title="Welcome to Mobile World !!!">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style>
+				<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+				<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Welcome to Mobile World !!!"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="It&#39;s all about being in Mobile Eco System"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://mobworld.wordpress.com/feed/;icon-uri=https://s1.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico"><meta name="description" content="After mentioning the DiffMerge as the  Diff Application in svnX preferences, I was receiving the below error message each time I tried to use the DiffMerge from SVNx. The DiffMerge application was not able to be opened due to the non availability of diffmerge.sh file in the /usr/local/bin directory. Copy the diffmerge.sh file from the DiffMerge.app&#39;s…">
+		<script type="text/javascript">
+		function __ATA_CC() {var v = document.cookie.match('(^|;) ?personalized-ads-consent=([^;]*)(;|$)');return v ? 1 : 0;}
+		var __ATA_PP = { pt: 1, ht: 0, tn: 'notepad', amp: false, siteid: 8982, consent: __ATA_CC() };
+		var __ATA = __ATA || {};
+		__ATA.cmd = __ATA.cmd || [];
+		__ATA.criteo = __ATA.criteo || {};
+		__ATA.criteo.cmd = __ATA.criteo.cmd || [];
+		</script>
+		<script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/head.js" async=""></script><link rel="amphtml" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/amp/"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script type="text/javascript" async="" src="./svnX用DiffMerge做对比工具_files/ga.js"></script>
+	<script charset="utf-8" src="./svnX用DiffMerge做对比工具_files/rate.php"></script><style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./svnX用DiffMerge做对比工具_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./svnX用DiffMerge做对比工具_files/services.css"><script type="text/javascript" async="" src="./svnX用DiffMerge做对比工具_files/saved_resource(4)"></script><style type="text/css" id="pd_popup_holder_style_2011092_post_1149">#pd_popup_holder_2011092_post_1149 { position:absolute; display:none; width:350px; height:auto; top:0px; left:0px; z-index:10000; border:solid 1px #CCC; background-color:white; padding:0px 15px;font-family:Arial,Sans;box-shadow: -10px 10px 20px rgba(0, 0, 0, .5);-webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);-moz-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25); }</style><script type="text/javascript" async="" src="./svnX用DiffMerge做对比工具_files/saved_resource(5)"></script><script src="./svnX用DiffMerge做对比工具_files/outstream.js" async=""></script><style type="text/css">.iowo-adv {overflow: hidden;}.iowo-adv__header {font-family: "Helvetica", Arial, sans-serif !important;font-size: 11.5px !important;text-align: center;position: relative;padding: 5px 0px;letter-spacing: 0.3px !important;font-weight: 300 !important;text-transform: uppercase;color: #aaa}.iowo-adv__close-icon {width: 24px;height: 24px;position: absolute;right: 10px;top: 34px;z-index:10;cursor: pointer;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH4gMQDS4lyDpzXgAAAKlJREFUWMPVV1sOgCAMo9yZU3Bo/THGRKaylTXuF9YW9mCgtbaVw3rvKAl25azWQgb5TcBqESNsWAvscFgceNuwkvy8gZUi3jAx68AkHwpgifiKgShA1BcsIK8PmKfxCKZdqTdkYCRVJF/CmT2ymYoBo7Yj5UprMN6GVYvY/hUCaRJKy1DaiKStWPoYSZ9j6UAiHcmkQ6l0LJd+TDLIn0TULHILu2aRWxw7NqDQ4pqt7KcAAAAASUVORK5CYII=");background-size: contain;}.iowo-adv__close-icon_touch {left: 10px;}.iowo-adv__sound-icon {width: 32px;cursor: pointer;height: 32px;position: absolute;bottom:12px;right:5px;}.iowo-adv__sound-icon_on {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QYcDigM2jawiwAAAbhJREFUWMPtl7FLHFEQxr+ZtwTytLDwmjSnhf+AYrpUBwGvS7F2YqFNQNjieCnsTlPscdxdZ2MVCORIEewMwf/AlEkRCRaSKqQMCrnbGZtVLPRye2/dJcSpdos33292vjfvLfAQ/3tQHkkajcYqM68YY3bjOD7NsjbwFXfOhSLyDgAPBgMBsJFlPXuK10TkLTNf5ZnKmoM9PvuSqh4w8yOfInjCyhcAHBLRtG8LeQLxJyLyiZkreRg4E0AURTOq+pGZ5/LahsEodwN4A+Dxfc6BUdsw9BF3zkWqOq2q+51O5+ckLWDP4p4R0Wtm/uqcW7wvkXFiVkT6YRiaQgGGw+Gaqn4AAGZeqFarTwsF6PV6F0R0eH3oEFUKBXDO1QBsX70bY74U7YGXAObT5/5dp2QRJuyLyGbmOaCq50Re14XYGPPqb/eDOwGCINhJkkRvHrGqOkNEtXHU2+32Z69JGMfxdwDrt5hrL+1vLpHZA9baLQDvSwNoNptirV0DcFQKQArxx1r7AsBxKQApxO8kSeoi8q0UAADodru/giB4LiI/0pl/UigAALRarTMiWhaRurV25+FX65+LSxNniSadskJNAAAAAElFTkSuQmCC");}.iowo-adv__sound-icon_off {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAdBJREFUWIXt1b9r1GAcx/HP840u94jo6mD/Aae24I9NHZSCi5NDO5TO7fLkCTgdt15y4C6IdHFwEpxscRHc1dHB0UFBOvToks/Xxch53j3JExNB6XcMz+X1Ti5PApzO/zLD4fBMm99JF7hzbm86nZ6kafp02Rrv/apz7mrnAd77LRF5BCBR1fvLcJKHIvIqy7JrnQV47zdIPgFgAEBEfjvfDH4RwHmSW50EZFl2g+RzEfn535P8FsABYN9au/vHAc65K2VZvhSRwQz+JUmSjRA+GAy2R6MRZ89lWuArAN6KyKU5/PZ4PP4QgwNAcOs4524ZYy7/UmzMQwBLcefcGsmDJjgQuAPe+5sAXocCF+EAGuNA4BlQ1ZW+8WDA38BbBXSJRwfU4SSnMThQswvqcBE5BHChWiMiGoMDDe9AE7zt1Ab0idcG9I0HA0i+6xsHGn4LvPfrAA4a4Md5np+LCah9BuZxVX1G8mMM0jpgwZXvW2s3AdwB8LnXgEV49ZKZTCafVPUuyaNeAkJ4taYoivcico/kSacBTfBq8jx/Y4x5AKD8caicXxMdoKpnSSZ1eDVFUbwwxuwA+Kqqj2MDFm7DNE2vA9i01u7GvttP55+b71U6NuXe6u9vAAAAAElFTkSuQmCC");}.iowo-adv__timer {position: absolute;bottom:5px;left:5px;min-width: 60px;padding: 3px;color: #aaaaaa;border-radius: 5px;font-family: sans-serif;text-align: center;background-color:black;z-index:10;}.iowo-timeline {position: absolute;bottom:0;left:0;width: 100%;height: 5px;background-color: rgba(0, 0, 0, 0.2);}.iowo-timeline__runner {position: relative;height: 5px;background-color: red;-moz-transition: .5s;-ms-transition: .5s;-o-transition: .5s;-webkit-transition: .5s;transition: .5s;transition-property: max-width;}</style><script type="text/javascript" charset="UTF-8" src="./svnX用DiffMerge做对比工具_files/ima3.js"></script><link rel="preload" href="./svnX用DiffMerge做对比工具_files/f.txt" as="script"><script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/f.txt"></script><script src="./svnX用DiffMerge做对比工具_files/bad.txt" type="text/javascript"></script></head>
+	<body class="post-template-default single single-post postid-1149 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+		<div id="pagewrapper">
+				<div id="header">
+			<h1 id="logo">
+				<a href="https://mobworld.wordpress.com/">Welcome to Mobile World !!!</a>
+			</h1>
+			<p class="description">It's all about being in Mobile Eco System</p>
+
+			<p class="socialmedia">
+				
+				
+				
+				
+							</p><!-- socialmedia -->
+
+			<div class="menu"><ul class="menu">
+<li><a href="https://mobworld.wordpress.com/">Home</a></li><li class="page_item page-item-2"><a href="https://mobworld.wordpress.com/about/">About</a></li>
+</ul></div>
+
+		</div>
+		<!--/header -->
+
+		
+		<div id="wrapper">
+
+
+	<div id="content">
+
+		<p class="post-nav">
+			<span class="previous">
+				<a href="https://mobworld.wordpress.com/2012/03/20/connecting-to-vpn-from-mac-osx/" rel="prev">Connecting to VPN from Mac&nbsp;OSX</a>			</span>
+			<span class="next">
+				<a href="https://mobworld.wordpress.com/2012/08/26/native-vs-html5-web-app/" rel="next">Native App development is here to&nbsp;stay</a>			</span>
+		</p>
+
+	
+		<div class="post-1149 post type-post status-publish format-standard hentry category-mac category-svn tag-diffmerge tag-integration tag-svnx" id="post-1149">
+			<h2 class="post-title">
+				Integrating DiffMerge with&nbsp;svnX			</h2>
+			<p class="post-date">
+				May 8, 2012			</p>
+			<p class="post-data">
+				<span class="postauthor">
+					<a href="http://mobappdevelopment.wordpress.com/" title="Visit Krishnan’s website" rel="author external">Krishnan</a>				</span>
+				<span class="postcategory">
+					<a href="https://mobworld.wordpress.com/category/mac/" rel="category tag">Mac</a>, <a href="https://mobworld.wordpress.com/category/svn/" rel="category tag">SVN</a>				</span>
+				<span class="posttag"><a href="https://mobworld.wordpress.com/tag/diffmerge/" rel="tag">DiffMerge</a>, <a href="https://mobworld.wordpress.com/tag/integration/" rel="tag">Integration</a>, <a href="https://mobworld.wordpress.com/tag/svnx/" rel="tag">svnX</a></span>				<span class="postcomment">
+					<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#respond">Leave a comment</a>				</span>
+							</p>
+			<div class="post-content">
+				<div class="pd-rating" id="pd_rating_holder_2011092_post_1149" style="display: inline-block;"><div class="rating-icons" id="pd_rate_2011092_post_1149" style="float:left;"><div class="rating-star-icon" onmouseout="PDRTJS_2011092_post_1149.rebuild();" onclick="PDRTJS_2011092_post_1149.rate(1);" onmouseover="PDRTJS_2011092_post_1149.hover(1);" id="PDRTJS_2011092_post_1149_stars_1" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_2011092_post_1149.rebuild();" onclick="PDRTJS_2011092_post_1149.rate(2);" onmouseover="PDRTJS_2011092_post_1149.hover(2);" id="PDRTJS_2011092_post_1149_stars_2" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_2011092_post_1149.rebuild();" onclick="PDRTJS_2011092_post_1149.rate(3);" onmouseover="PDRTJS_2011092_post_1149.hover(3);" id="PDRTJS_2011092_post_1149_stars_3" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_2011092_post_1149.rebuild();" onclick="PDRTJS_2011092_post_1149.rate(4);" onmouseover="PDRTJS_2011092_post_1149.hover(4);" id="PDRTJS_2011092_post_1149_stars_4" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_2011092_post_1149.rebuild();" onclick="PDRTJS_2011092_post_1149.rate(5);" onmouseover="PDRTJS_2011092_post_1149.hover(5);" id="PDRTJS_2011092_post_1149_stars_5" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div></div><span style="float:left;">&nbsp;</span><div id="rating_info_2011092_post_1149" style="display:block;float:left;background:url(https://polldaddy.com/images/ratings/info.png) no-repeat 3px 2px;width:16px;height:16px;cursor:pointer; null " onclick="javascript:PDRTJS_2011092_post_1149.togglePopup();return false;"><span style="display:none;">i</span></div><div class="pd_popup_holder" id="pd_popup_holder_2011092_post_1149">&nbsp;</div><div class="rating-msg" id="PDRTJS_2011092_post_1149_msg" style="float:left; padding-left: 5px; text-align: left; font:normal normal /16px ; color: #;">2 Votes</div><p style="padding: 0px; margin: 0px; clear: both;"></p></div><br><p>After mentioning the DiffMerge as the &nbsp;Diff Application in svnX&nbsp;preferences, I was receiving the below error message each time I tried to use the DiffMerge from SVNx.</p>
+<p><a href="https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png"><img data-attachment-id="1150" data-permalink="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/screen-shot-2012-05-08-at-1-57-44-pm/" data-orig-file="https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png?w=500" data-orig-size="427,210" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="Screen shot 2012-05-08 at 1.57.44 PM" data-image-description="" data-medium-file="https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png?w=500?w=300" data-large-file="https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png?w=500?w=427" class="aligncenter size-full wp-image-1150" title="Screen shot 2012-05-08 at 1.57.44 PM" src="./svnX用DiffMerge做对比工具_files/screen-shot-2012-05-08-at-1-57-44-pm.png" alt="" srcset="https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png 427w, https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png?w=150 150w, https://mobworld.files.wordpress.com/2012/05/screen-shot-2012-05-08-at-1-57-44-pm.png?w=300 300w" sizes="(max-width: 427px) 100vw, 427px"></a></p>
+<p>The DiffMerge application was not able to be opened due to the non availability of <span class="skimlinks-unlinked">diffmerge.sh</span> file in the /usr/local/bin directory.</p>
+<p>Copy the <span class="skimlinks-unlinked">diffmerge.sh</span> file from the <span class="skimlinks-unlinked">DiffMerge.app’s</span> &nbsp;Resource folder &nbsp;in to the bin by the following command:</p>
+<p>cp /Applications/<span class="skimlinks-unlinked">DiffMerge.app/Contents/Resources/diffmerge.sh</span> /usr/local/bin/<span class="skimlinks-unlinked">diffmerge.sh</span></p>
+<p>If this throws you Permission Denied error, &nbsp;run the command using sudo command.</p>
+<p>Once the copy is done , the svnX application will be able to open DiffMerge app.</p>
+<div id="atatags-370373-5b43532b90324">
+        <script type="text/javascript">
+            __ATA.cmd.push(function() {
+                __ATA.initVideoSlot('atatags-370373-5b43532b90324', {
+                    sectionId: '370373',
+                    format: 'inread'
+                });
+            });
+        </script>
+    </div>		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">		<div style="padding-bottom:15px;width:300px;height:250px;float:left;margin-right:5px;margin-top:0px">
+		<div id="atatags-26942-5b43532b9034a" style="width: auto; height: auto;"><div style="width: 300px; height: 250px;"><iframe frameborder="0" scrolling="no" width="300" height="250" style="border:none;overflow:hidden;width:300px;height:250px;" src="./svnX用DiffMerge做对比工具_files/saved_resource(12).html"></iframe></div><div id="atatags-26942-5b43532b9034a__controls" style="width:300px;height:10px;text-align:right;line-height:6px;"><span id="atatags-26942-5b43532b9034a__complain-btn" style="font-size: 10px; color: rgb(109, 171, 210); text-decoration: underline; cursor: pointer; display: inline;">Report this ad</span></div></div></div>		<div style="padding-bottom:15px;width:300px;height:250px;float:left;margin-top:0px">
+		<div id="atatags-114160-5b43532b9034b" style="width: auto; height: auto;"><div style="width: 300px; height: 250px;"><iframe frameborder="0" scrolling="no" width="300" height="250" style="border:none;overflow:hidden;width:300px;height:250px;" src="./svnX用DiffMerge做对比工具_files/saved_resource(13).html"></iframe></div><div id="atatags-114160-5b43532b9034b__controls" style="width:300px;height:10px;text-align:right;line-height:6px;"><span id="atatags-114160-5b43532b9034b__complain-btn" style="font-size: 10px; color: rgb(109, 171, 210); text-decoration: underline; cursor: pointer; display: inline;">Report this ad</span></div></div></div></div>
+				
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-rating-enabled sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-email share-service-visible"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/?share=email&amp;nb=1" target="_blank" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1149" class="share-facebook sd-button share-icon" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/?share=facebook&amp;nb=1" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1149" class="share-twitter sd-button share-icon" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/?share=reddit&amp;nb=1" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-13094777-1149-5b43532b90f1d" data-src="//widgets.wp.com/likes/index.html?ver=20180319#blog_id=13094777&amp;post_id=1149&amp;origin=mobworld.wordpress.com&amp;obj_id=13094777-1149-5b43532b90f1d" data-name="like-post-frame-13094777-1149-5b43532b90f1d"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-13094777-1149-5b43532b90f1d" height="55px" width="100%" frameborder="0" src="./svnX用DiffMerge做对比工具_files/index.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="40" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://mobworld.wordpress.com/2010/04/16/rename-project-file-and-target-name-in-xcode/" title="Rename  project File and Target Name in XCode
+
+Hi Friends, This post is going to help you to change the name of your Project in XCode. And follow the steps given below to achieve the same. 1. Make a copy of your project Folder and delete the build folder if there is one. 2. Rename it to the…" rel="nofollow" data-origin="1149" data-position="0">Rename  project File and Target Name in XCode</a></span><span class="jp-relatedposts-post-context">In "iPhone"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="416" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://mobworld.wordpress.com/2010/07/05/memory-management-in-android/" title="Memory Management in Android
+
+Hi, You might be aware of the memory concept of android. Here I have described the basic  memory concept in android, Introduction about Android memory Android Android is a software stack for mobile devices that includes an operating system, middleware and key applications. The Android SDK provides the tools and…" rel="nofollow" data-origin="1149" data-position="1">Memory Management in Android</a></span><span class="jp-relatedposts-post-context">In "Android"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="210" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://mobworld.wordpress.com/2010/06/08/json-in-iphone/" title="JSON in iPhone
+
+UPDATE:  An Update has been done to JSON Library. It is better you follow this link. JSON is a lightweight data-interchange format, which is easy for us to read and write. And sadly iPhone has no framework to process and form valid JSON data. But a third party JSON framework…" rel="nofollow" data-origin="1149" data-position="2">JSON in iPhone</a></span><span class="jp-relatedposts-post-context">In "iPhone"</span></p></div></div></div>			</div>
+					</div>
+		<!--/post -->
+
+		
+<!-- You can start editing here. -->
+
+
+			<!-- If comments are open, but there are no comments. -->
+
+	 
+
+
+	<div id="respond" class="comment-respond js">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://mobworld.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="d41af9d00b"><input type="hidden" name="_wp_http_referer" value="/2012/05/08/svnx-diffmerge-integration/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none solid rgba(0, 0, 0, 0.7); word-spacing: 0px; text-indent: 0px; line-height: 19.6px; width: 498px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 39px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#comment-form-guest" id="postas-guest" class="nascar-signin-link" title="Login via Guest">
+									</a>
+			</li>
+			<li>
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#comment-form-load-service:WordPress.com" id="postas-wordpress" class="nascar-signin-link" title="Login via WordPress.com">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"></path></g></svg>				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="./svnX用DiffMerge做对比工具_files/saved_resource(14).html" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+			<li>
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#comment-form-load-service:Twitter" id="postas-twitter" class="nascar-signin-link" title="Login via Twitter">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z"></path></g></svg>				</a>
+			</li>
+			<li>
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#comment-form-load-service:Facebook" id="postas-facebook" class="nascar-signin-link" title="Login via Facebook">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z"></path></g></svg>				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./svnX用DiffMerge做对比工具_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value=""></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./svnX用DiffMerge做对比工具_files/ad516503a11cd5ca435acc9bb6523536" alt="WordPress.com Logo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+						<p class="comment-form-posting-as pa-wordpress">
+			<strong></strong>
+			You are commenting using your <span class="skimlinks-unlinked">WordPress.com</span> account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;wordpress&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"></path></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./svnX用DiffMerge做对比工具_files/ad516503a11cd5ca435acc9bb6523536" alt="Google+ photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+						<p class="comment-form-posting-as pa-googleplus">
+			<strong></strong>
+			You are commenting using your Google+ account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;googleplus&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" x="0px" y="0px" viewBox="0 0 60 60"><path fill="#519bf7" d="M56.3,30c0,-1.6 -0.2,-3.4 -0.6,-5h-3.1H42.2H30v10.6h14.8C44,39.3 42,42 39.1,43.9l8.8,6.8C53,46 56.3,39 56.3,30z"></path><path fill="#3db366" d="M30,57.5c6.7,0 13.1,-2.4 17.9,-6.8l-8.8,-6.8c-2.5,1.6 -5.6,2.4 -9.1,2.4c-7.2,0 -13.3,-4.7 -15.4,-11.2l-9.3,7.1C9.8,51.3 19.1,57.5 30,57.5z"></path><path fill="#fdc600" d="M5.3,42.2l9.3,-7.1c-0.5,-1.6 -0.8,-3.3 -0.8,-5.1s0.3,-3.5 0.8,-5.1l-9.3,-7.1C3.5,21.5 2.5,25.6 2.5,30S3.5,38.5 5.3,42.2z"></path><path fill="#f15b44" d="M40.1,17.4l8,-8C43.3,5.1 37,2.5 30,2.5C19.1,2.5 9.8,8.7 5.3,17.8l9.3,7.1c2.1,-6.5 8.2,-11.1 15.4,-11.1C33.9,13.7 37.4,15.1 40.1,17.4z"></path></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./svnX用DiffMerge做对比工具_files/ad516503a11cd5ca435acc9bb6523536" alt="Twitter picture" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+						<p class="comment-form-posting-as pa-twitter">
+			<strong></strong>
+			You are commenting using your Twitter account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;twitter&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z"></path></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./svnX用DiffMerge做对比工具_files/ad516503a11cd5ca435acc9bb6523536" alt="Facebook photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+						<p class="comment-form-posting-as pa-facebook">
+			<strong></strong>
+			You are commenting using your Facebook account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;facebook&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z"></path></g></svg></span>
+		</p>
+		w
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="1149" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="3f92a4f44f"></p>
+<input type="hidden" name="genseq" value="1531138859">
+<p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1531138861029"></form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+
+		<p class="post-nav">
+			<span class="previous">
+				<a href="https://mobworld.wordpress.com/2012/03/20/connecting-to-vpn-from-mac-osx/" rel="prev">Connecting to VPN from Mac&nbsp;OSX</a>			</span>
+			<span class="next">
+				<a href="https://mobworld.wordpress.com/2012/08/26/native-vs-html5-web-app/" rel="next">Native App development is here to&nbsp;stay</a>			</span>
+		</p>
+
+	
+
+	</div>
+	<!--/content -->
+
+	<div id="sidebar">
+	
+		<div id="recent-posts-3" class="widget widget_recent_entries">		<h4 class="widgettitle">Recent Posts</h4>		<ul>
+											<li>
+					<a href="https://mobworld.wordpress.com/2012/08/26/native-vs-html5-web-app/">Native App development is here to&nbsp;stay</a>
+									</li>
+											<li>
+					<a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/">Integrating DiffMerge with&nbsp;svnX</a>
+									</li>
+											<li>
+					<a href="https://mobworld.wordpress.com/2012/03/20/connecting-to-vpn-from-mac-osx/">Connecting to VPN from Mac&nbsp;OSX</a>
+									</li>
+											<li>
+					<a href="https://mobworld.wordpress.com/2012/03/14/1139/">(no title)</a>
+									</li>
+											<li>
+					<a href="https://mobworld.wordpress.com/2012/03/12/1136/">(no title)</a>
+									</li>
+					</ul>
+		</div><div id="recent-comments-2" class="widget widget_recent_comments"><h4 class="widgettitle">Recent Comments</h4>				<table class="recentcommentsavatar" cellspacing="0" cellpadding="0" border="0">
+					<tbody><tr><td title="Jeremy Yamada" class="recentcommentsavatartop" style="height:48px; width:48px;"><a href="http://www.facebook.com/JeremyYamada" rel="nofollow"><img alt="" src="./svnX用DiffMerge做对比工具_files/picture" class="avatar avatar-48" height="48" width="48"></a></td><td class="recentcommentstexttop" style=""><a href="http://www.facebook.com/JeremyYamada" rel="nofollow">Jeremy Yamada</a> on <a href="https://mobworld.wordpress.com/2010/04/21/the-project-cannot-be-built-until-build-path-errors-are-resolved-error-in-eclipse-ide/#comment-316">The project cannot be built un…</a></td></tr><tr><td title="aseem" class="recentcommentsavatarend" style="height:48px; width:48px;"><img alt="" src="./svnX用DiffMerge做对比工具_files/46215b366734218d5b637d1f4c6d6521" class="avatar avatar-48 grav-hashed grav-hijack" height="48" width="48" id="grav-46215b366734218d5b637d1f4c6d6521-0"></td><td class="recentcommentstextend" style="">aseem on <a href="https://mobworld.wordpress.com/2010/04/21/the-project-cannot-be-built-until-build-path-errors-are-resolved-error-in-eclipse-ide/#comment-315">The project cannot be built un…</a></td></tr><tr><td title="Mauricio Sartori" class="recentcommentsavatarend" style="height:48px; width:48px;"><a href="http://desarrollos-apps.com/" rel="nofollow"><img alt="" src="./svnX用DiffMerge做对比工具_files/56cc9bd9f43c2429786891a854fd2198.jpeg" class="avatar avatar-48 grav-hashed" height="48" width="48" id="grav-56cc9bd9f43c2429786891a854fd2198-0"></a></td><td class="recentcommentstextend" style=""><a href="http://desarrollos-apps.com/" rel="nofollow">Mauricio Sartori</a> on <a href="https://mobworld.wordpress.com/2010/10/15/update-android-sdk-independently-without-using-eclipse/#comment-312">Solution to update Android SDK…</a></td></tr><tr><td title="doudou" class="recentcommentsavatarend" style="height:48px; width:48px;"><img alt="" src="./svnX用DiffMerge做对比工具_files/540ff118d840aa6df74780cef05cadcf" class="avatar avatar-48 grav-hashed grav-hijack" height="48" width="48" id="grav-540ff118d840aa6df74780cef05cadcf-0"></td><td class="recentcommentstextend" style="">doudou on <a href="https://mobworld.wordpress.com/2010/10/15/update-android-sdk-independently-without-using-eclipse/#comment-310">Solution to update Android SDK…</a></td></tr><tr><td title="Jayad" class="recentcommentsavatarend" style="height:48px; width:48px;"><img alt="" src="./svnX用DiffMerge做对比工具_files/a7c9a12431d8ff0663b408b77625ed60" class="avatar avatar-48 grav-hashed grav-hijack" height="48" width="48" id="grav-a7c9a12431d8ff0663b408b77625ed60-0"></td><td class="recentcommentstextend" style="">Jayad on <a href="https://mobworld.wordpress.com/2010/10/15/update-android-sdk-independently-without-using-eclipse/#comment-309">Solution to update Android SDK…</a></td></tr>				</tbody></table>
+				</div><div id="categories-2" class="widget widget_categories"><h4 class="widgettitle">Categories</h4>		<ul>
+	<li class="cat-item cat-item-641922"><a href="https://mobworld.wordpress.com/category/android/">Android</a>
+</li>
+	<li class="cat-item cat-item-291"><a href="https://mobworld.wordpress.com/category/apple/">Apple</a>
+</li>
+	<li class="cat-item cat-item-8224"><a href="https://mobworld.wordpress.com/category/blackberry/">BlackBerry</a>
+</li>
+	<li class="cat-item cat-item-31280"><a href="https://mobworld.wordpress.com/category/bluetooth/">Bluetooth</a>
+</li>
+	<li class="cat-item cat-item-18466"><a href="https://mobworld.wordpress.com/category/eclipse/">Eclipse</a>
+</li>
+	<li class="cat-item cat-item-54"><a href="https://mobworld.wordpress.com/category/general/">General</a>
+</li>
+	<li class="cat-item cat-item-7746"><a href="https://mobworld.wordpress.com/category/ide/">IDE</a>
+</li>
+	<li class="cat-item cat-item-580102"><a href="https://mobworld.wordpress.com/category/ipad/">iPad</a>
+</li>
+	<li class="cat-item cat-item-106595"><a href="https://mobworld.wordpress.com/category/iphone/">iPhone</a>
+</li>
+	<li class="cat-item cat-item-10698"><a href="https://mobworld.wordpress.com/category/j2me/">J2ME</a>
+</li>
+	<li class="cat-item cat-item-1017"><a href="https://mobworld.wordpress.com/category/java/">Java</a>
+</li>
+	<li class="cat-item cat-item-808"><a href="https://mobworld.wordpress.com/category/mac/">Mac</a>
+</li>
+	<li class="cat-item cat-item-36215029"><a href="https://mobworld.wordpress.com/category/mobile-native-app/">Mobile Native App</a>
+</li>
+	<li class="cat-item cat-item-19006656"><a href="https://mobworld.wordpress.com/category/mobile-web-app/">Mobile Web App</a>
+</li>
+	<li class="cat-item cat-item-1491738"><a href="https://mobworld.wordpress.com/category/nokia-s60/">Nokia S60</a>
+</li>
+	<li class="cat-item cat-item-35078870"><a href="https://mobworld.wordpress.com/category/objective-c-2/">objective C</a>
+</li>
+	<li class="cat-item cat-item-1515"><a href="https://mobworld.wordpress.com/category/palm/">Palm</a>
+</li>
+	<li class="cat-item cat-item-1511"><a href="https://mobworld.wordpress.com/category/paypal/">PayPal</a>
+</li>
+	<li class="cat-item cat-item-164684"><a href="https://mobworld.wordpress.com/category/svn/">SVN</a>
+</li>
+	<li class="cat-item cat-item-18762"><a href="https://mobworld.wordpress.com/category/symbian/">Symbian</a>
+</li>
+	<li class="cat-item cat-item-178048"><a href="https://mobworld.wordpress.com/category/titanium/">Titanium</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://mobworld.wordpress.com/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-168105"><a href="https://mobworld.wordpress.com/category/webservice/">WebService</a>
+</li>
+	<li class="cat-item cat-item-1846"><a href="https://mobworld.wordpress.com/category/windows-mobile/">Windows Mobile</a>
+</li>
+	<li class="cat-item cat-item-176525"><a href="https://mobworld.wordpress.com/category/xcode/">Xcode</a>
+</li>
+		</ul>
+</div><div id="meta-3" class="widget widget_meta"><h4 class="widgettitle">Meta</h4>			<ul>
+			<li><a href="https://wordpress.com/start?ref=wplogin">Register</a></li>			<li><a href="https://mobworld.wordpress.com/wp-login.php">Log in</a></li>
+			<li><a href="https://mobworld.wordpress.com/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://mobworld.wordpress.com/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.com/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.com</a></li>			</ul>
+			</div><div id="wp_tag_cloud-2" class="widget wp_widget_tag_cloud"><h4 class="widgettitle"></h4><div style="overflow:hidden"><a href="https://mobworld.wordpress.com/tag/doc/" class="tag-cloud-link tag-link-68057 tag-link-position-1" style="font-size: 8pt;" aria-label="*.doc (1 item)">*.doc</a>
+<a href="https://mobworld.wordpress.com/tag/xls/" class="tag-cloud-link tag-link-68058 tag-link-position-2" style="font-size: 8pt;" aria-label="*.xls (1 item)">*.xls</a>
+<a href="https://mobworld.wordpress.com/tag/acquisition/" class="tag-cloud-link tag-link-142153 tag-link-position-3" style="font-size: 8pt;" aria-label="Acquisition (1 item)">Acquisition</a>
+<a href="https://mobworld.wordpress.com/tag/android/" class="tag-cloud-link tag-link-641922 tag-link-position-4" style="font-size: 19.666666666667pt;" aria-label="Android (4 items)">Android</a>
+<a href="https://mobworld.wordpress.com/tag/android-save-battery-life/" class="tag-cloud-link tag-link-37998295 tag-link-position-5" style="font-size: 8pt;" aria-label="Android-Save Battery Life (1 item)">Android-Save Battery Life</a>
+<a href="https://mobworld.wordpress.com/tag/android-market/" class="tag-cloud-link tag-link-10462233 tag-link-position-6" style="font-size: 8pt;" aria-label="Android Market (1 item)">Android Market</a>
+<a href="https://mobworld.wordpress.com/tag/android-sdk/" class="tag-cloud-link tag-link-2641594 tag-link-position-7" style="font-size: 8pt;" aria-label="Android SDK (1 item)">Android SDK</a>
+<a href="https://mobworld.wordpress.com/tag/android-ui/" class="tag-cloud-link tag-link-19024854 tag-link-position-8" style="font-size: 8pt;" aria-label="Android UI (1 item)">Android UI</a>
+<a href="https://mobworld.wordpress.com/tag/annnotation/" class="tag-cloud-link tag-link-37891336 tag-link-position-9" style="font-size: 8pt;" aria-label="Annnotation (1 item)">Annnotation</a>
+<a href="https://mobworld.wordpress.com/tag/app-icon/" class="tag-cloud-link tag-link-17645682 tag-link-position-10" style="font-size: 8pt;" aria-label="App Icon (1 item)">App Icon</a>
+<a href="https://mobworld.wordpress.com/tag/asynctask-android/" class="tag-cloud-link tag-link-37293914 tag-link-position-11" style="font-size: 8pt;" aria-label="AsyncTask Android (1 item)">AsyncTask Android</a>
+<a href="https://mobworld.wordpress.com/tag/audiotoolbox/" class="tag-cloud-link tag-link-36315251 tag-link-position-12" style="font-size: 8pt;" aria-label="AudioToolbox (1 item)">AudioToolbox</a>
+<a href="https://mobworld.wordpress.com/tag/background-image/" class="tag-cloud-link tag-link-3176135 tag-link-position-13" style="font-size: 8pt;" aria-label="Background Image (1 item)">Background Image</a>
+<a href="https://mobworld.wordpress.com/tag/battery/" class="tag-cloud-link tag-link-135609 tag-link-position-14" style="font-size: 8pt;" aria-label="Battery (1 item)">Battery</a>
+<a href="https://mobworld.wordpress.com/tag/blackberry/" class="tag-cloud-link tag-link-8224 tag-link-position-15" style="font-size: 16.75pt;" aria-label="BlackBerry (3 items)">BlackBerry</a>
+<a href="https://mobworld.wordpress.com/tag/blackberry-persistentstorage/" class="tag-cloud-link tag-link-38706407 tag-link-position-16" style="font-size: 8pt;" aria-label="Blackberry - PersistentStorage (1 item)">Blackberry - PersistentStorage</a>
+<a href="https://mobworld.wordpress.com/tag/blackberry-storage/" class="tag-cloud-link tag-link-38600426 tag-link-position-17" style="font-size: 8pt;" aria-label="Blackberry - Storage (1 item)">Blackberry - Storage</a>
+<a href="https://mobworld.wordpress.com/tag/blogs/" class="tag-cloud-link tag-link-460 tag-link-position-18" style="font-size: 8pt;" aria-label="Blogs (1 item)">Blogs</a>
+<a href="https://mobworld.wordpress.com/tag/characters/" class="tag-cloud-link tag-link-634 tag-link-position-19" style="font-size: 8pt;" aria-label="CHARACTERS (1 item)">CHARACTERS</a>
+<a href="https://mobworld.wordpress.com/tag/comparision/" class="tag-cloud-link tag-link-495827 tag-link-position-20" style="font-size: 8pt;" aria-label="Comparision (1 item)">Comparision</a>
+<a href="https://mobworld.wordpress.com/tag/copy/" class="tag-cloud-link tag-link-20951 tag-link-position-21" style="font-size: 8pt;" aria-label="copy (1 item)">copy</a>
+<a href="https://mobworld.wordpress.com/tag/core-data/" class="tag-cloud-link tag-link-895080 tag-link-position-22" style="font-size: 8pt;" aria-label="Core Data (1 item)">Core Data</a>
+<a href="https://mobworld.wordpress.com/tag/credentials/" class="tag-cloud-link tag-link-46975 tag-link-position-23" style="font-size: 8pt;" aria-label="Credentials (1 item)">Credentials</a>
+<a href="https://mobworld.wordpress.com/tag/cut/" class="tag-cloud-link tag-link-113993 tag-link-position-24" style="font-size: 8pt;" aria-label="Cut (1 item)">Cut</a>
+<a href="https://mobworld.wordpress.com/tag/database/" class="tag-cloud-link tag-link-475 tag-link-position-25" style="font-size: 8pt;" aria-label="Database (1 item)">Database</a>
+<a href="https://mobworld.wordpress.com/tag/development-environment/" class="tag-cloud-link tag-link-17887 tag-link-position-26" style="font-size: 8pt;" aria-label="Development Environment (1 item)">Development Environment</a>
+<a href="https://mobworld.wordpress.com/tag/eclipse/" class="tag-cloud-link tag-link-18466 tag-link-position-27" style="font-size: 16.75pt;" aria-label="Eclipse (3 items)">Eclipse</a>
+<a href="https://mobworld.wordpress.com/tag/emulator/" class="tag-cloud-link tag-link-708508 tag-link-position-28" style="font-size: 8pt;" aria-label="Emulator (1 item)">Emulator</a>
+<a href="https://mobworld.wordpress.com/tag/folder-creation/" class="tag-cloud-link tag-link-36218454 tag-link-position-29" style="font-size: 8pt;" aria-label="Folder Creation (1 item)">Folder Creation</a>
+<a href="https://mobworld.wordpress.com/tag/fonts/" class="tag-cloud-link tag-link-24938 tag-link-position-30" style="font-size: 8pt;" aria-label="Fonts (1 item)">Fonts</a>
+<a href="https://mobworld.wordpress.com/tag/go-green/" class="tag-cloud-link tag-link-581881 tag-link-position-31" style="font-size: 8pt;" aria-label="Go-Green (1 item)">Go-Green</a>
+<a href="https://mobworld.wordpress.com/tag/guidleines/" class="tag-cloud-link tag-link-7690444 tag-link-position-32" style="font-size: 8pt;" aria-label="Guidleines (1 item)">Guidleines</a>
+<a href="https://mobworld.wordpress.com/tag/httppost/" class="tag-cloud-link tag-link-18173426 tag-link-position-33" style="font-size: 8pt;" aria-label="HttpPost (1 item)">HttpPost</a>
+<a href="https://mobworld.wordpress.com/tag/installation/" class="tag-cloud-link tag-link-25622 tag-link-position-34" style="font-size: 8pt;" aria-label="Installation (1 item)">Installation</a>
+<a href="https://mobworld.wordpress.com/tag/internet-connection/" class="tag-cloud-link tag-link-79317 tag-link-position-35" style="font-size: 13.25pt;" aria-label="Internet Connection (2 items)">Internet Connection</a>
+<a href="https://mobworld.wordpress.com/tag/iphone/" class="tag-cloud-link tag-link-106595 tag-link-position-36" style="font-size: 13.25pt;" aria-label="iPhone (2 items)">iPhone</a>
+<a href="https://mobworld.wordpress.com/tag/j2me/" class="tag-cloud-link tag-link-10698 tag-link-position-37" style="font-size: 8pt;" aria-label="J2ME (1 item)">J2ME</a>
+<a href="https://mobworld.wordpress.com/tag/json/" class="tag-cloud-link tag-link-72721 tag-link-position-38" style="font-size: 13.25pt;" aria-label="JSON (2 items)">JSON</a>
+<a href="https://mobworld.wordpress.com/tag/language/" class="tag-cloud-link tag-link-1934 tag-link-position-39" style="font-size: 8pt;" aria-label="Language (1 item)">Language</a>
+<a href="https://mobworld.wordpress.com/tag/log/" class="tag-cloud-link tag-link-12657 tag-link-position-40" style="font-size: 13.25pt;" aria-label="Log (2 items)">Log</a>
+<a href="https://mobworld.wordpress.com/tag/logging/" class="tag-cloud-link tag-link-62087 tag-link-position-41" style="font-size: 8pt;" aria-label="Logging (1 item)">Logging</a>
+<a href="https://mobworld.wordpress.com/tag/lwuit/" class="tag-cloud-link tag-link-6801256 tag-link-position-42" style="font-size: 8pt;" aria-label="LWUIT (1 item)">LWUIT</a>
+<a href="https://mobworld.wordpress.com/tag/mapview/" class="tag-cloud-link tag-link-2667052 tag-link-position-43" style="font-size: 8pt;" aria-label="MapView (1 item)">MapView</a>
+<a href="https://mobworld.wordpress.com/tag/memory-leak/" class="tag-cloud-link tag-link-70638 tag-link-position-44" style="font-size: 13.25pt;" aria-label="Memory Leak (2 items)">Memory Leak</a>
+<a href="https://mobworld.wordpress.com/tag/memory-management/" class="tag-cloud-link tag-link-680992 tag-link-position-45" style="font-size: 19.666666666667pt;" aria-label="Memory Management (4 items)">Memory Management</a>
+<a href="https://mobworld.wordpress.com/tag/mkreversegeocoder/" class="tag-cloud-link tag-link-37891844 tag-link-position-46" style="font-size: 8pt;" aria-label="MKReverseGeocoder (1 item)">MKReverseGeocoder</a>
+<a href="https://mobworld.wordpress.com/tag/mobile-app/" class="tag-cloud-link tag-link-780857 tag-link-position-47" style="font-size: 8pt;" aria-label="Mobile App (1 item)">Mobile App</a>
+<a href="https://mobworld.wordpress.com/tag/mobile-apps/" class="tag-cloud-link tag-link-77847 tag-link-position-48" style="font-size: 8pt;" aria-label="Mobile Apps (1 item)">Mobile Apps</a>
+<a href="https://mobworld.wordpress.com/tag/mobile-native-app/" class="tag-cloud-link tag-link-36215029 tag-link-position-49" style="font-size: 19.666666666667pt;" aria-label="Mobile Native App (4 items)">Mobile Native App</a>
+<a href="https://mobworld.wordpress.com/tag/mobile-web-app/" class="tag-cloud-link tag-link-19006656 tag-link-position-50" style="font-size: 22pt;" aria-label="Mobile Web App (5 items)">Mobile Web App</a>
+<a href="https://mobworld.wordpress.com/tag/multiple-platforms/" class="tag-cloud-link tag-link-5838188 tag-link-position-51" style="font-size: 8pt;" aria-label="Multiple Platforms (1 item)">Multiple Platforms</a>
+<a href="https://mobworld.wordpress.com/tag/multitasking/" class="tag-cloud-link tag-link-306959 tag-link-position-52" style="font-size: 8pt;" aria-label="multitasking (1 item)">multitasking</a>
+<a href="https://mobworld.wordpress.com/tag/nokia-s60-2/" class="tag-cloud-link tag-link-41861112 tag-link-position-53" style="font-size: 8pt;" aria-label="nokia s60 (1 item)">nokia s60</a>
+<a href="https://mobworld.wordpress.com/tag/nslog/" class="tag-cloud-link tag-link-3144305 tag-link-position-54" style="font-size: 8pt;" aria-label="NSLog (1 item)">NSLog</a>
+<a href="https://mobworld.wordpress.com/tag/nsstring/" class="tag-cloud-link tag-link-5594267 tag-link-position-55" style="font-size: 8pt;" aria-label="NSSTRING (1 item)">NSSTRING</a>
+<a href="https://mobworld.wordpress.com/tag/occurrences/" class="tag-cloud-link tag-link-201597 tag-link-position-56" style="font-size: 8pt;" aria-label="OCCURRENCES (1 item)">OCCURRENCES</a>
+<a href="https://mobworld.wordpress.com/tag/osi/" class="tag-cloud-link tag-link-338757 tag-link-position-57" style="font-size: 8pt;" aria-label="OSI (1 item)">OSI</a>
+<a href="https://mobworld.wordpress.com/tag/paste/" class="tag-cloud-link tag-link-966514 tag-link-position-58" style="font-size: 8pt;" aria-label="paste (1 item)">paste</a>
+<a href="https://mobworld.wordpress.com/tag/pdf/" class="tag-cloud-link tag-link-47759 tag-link-position-59" style="font-size: 13.25pt;" aria-label="pdf (2 items)">pdf</a>
+<a href="https://mobworld.wordpress.com/tag/project-name/" class="tag-cloud-link tag-link-350423 tag-link-position-60" style="font-size: 8pt;" aria-label="Project Name (1 item)">Project Name</a>
+<a href="https://mobworld.wordpress.com/tag/promotion/" class="tag-cloud-link tag-link-1641 tag-link-position-61" style="font-size: 8pt;" aria-label="Promotion (1 item)">Promotion</a>
+<a href="https://mobworld.wordpress.com/tag/property/" class="tag-cloud-link tag-link-19956 tag-link-position-62" style="font-size: 8pt;" aria-label="property (1 item)">property</a>
+<a href="https://mobworld.wordpress.com/tag/proxy/" class="tag-cloud-link tag-link-9628 tag-link-position-63" style="font-size: 8pt;" aria-label="Proxy (1 item)">Proxy</a>
+<a href="https://mobworld.wordpress.com/tag/push-notification/" class="tag-cloud-link tag-link-9519955 tag-link-position-64" style="font-size: 8pt;" aria-label="push notification (1 item)">push notification</a>
+<a href="https://mobworld.wordpress.com/tag/s60/" class="tag-cloud-link tag-link-20752 tag-link-position-65" style="font-size: 8pt;" aria-label="s60 (1 item)">s60</a>
+<a href="https://mobworld.wordpress.com/tag/sqlite/" class="tag-cloud-link tag-link-142835 tag-link-position-66" style="font-size: 8pt;" aria-label="Sqlite (1 item)">Sqlite</a>
+<a href="https://mobworld.wordpress.com/tag/target-name/" class="tag-cloud-link tag-link-25634000 tag-link-position-67" style="font-size: 8pt;" aria-label="Target Name (1 item)">Target Name</a>
+<a href="https://mobworld.wordpress.com/tag/touches/" class="tag-cloud-link tag-link-831685 tag-link-position-68" style="font-size: 13.25pt;" aria-label="touches (2 items)">touches</a>
+<a href="https://mobworld.wordpress.com/tag/uitextview/" class="tag-cloud-link tag-link-4970156 tag-link-position-69" style="font-size: 8pt;" aria-label="UITextView (1 item)">UITextView</a>
+<a href="https://mobworld.wordpress.com/tag/unicode/" class="tag-cloud-link tag-link-34880 tag-link-position-70" style="font-size: 8pt;" aria-label="Unicode (1 item)">Unicode</a>
+<a href="https://mobworld.wordpress.com/tag/voice-action-for-android/" class="tag-cloud-link tag-link-40714033 tag-link-position-71" style="font-size: 8pt;" aria-label="Voice Action for Android (1 item)">Voice Action for Android</a>
+<a href="https://mobworld.wordpress.com/tag/web-app/" class="tag-cloud-link tag-link-17280 tag-link-position-72" style="font-size: 8pt;" aria-label="Web App (1 item)">Web App</a>
+<a href="https://mobworld.wordpress.com/tag/web-service/" class="tag-cloud-link tag-link-13849 tag-link-position-73" style="font-size: 8pt;" aria-label="Web Service (1 item)">Web Service</a>
+<a href="https://mobworld.wordpress.com/tag/windows-7/" class="tag-cloud-link tag-link-729864 tag-link-position-74" style="font-size: 8pt;" aria-label="Windows 7 (1 item)">Windows 7</a>
+<a href="https://mobworld.wordpress.com/tag/windows-mobile/" class="tag-cloud-link tag-link-1846 tag-link-position-75" style="font-size: 16.75pt;" aria-label="Windows Mobile (3 items)">Windows Mobile</a></div></div><div id="linkcat-1356" class="widget widget_links"><h4 class="widgettitle">Blogroll</h4>
+	<ul class="xoxo blogroll">
+<li><a href="http://wordpress.com/">WordPress.com</a></li>
+<li><a href="http://wordpress.org/">WordPress.org</a></li>
+
+	</ul>
+</div>
+<div id="blog_subscription-3" class="widget widget_blog_subscription"><h4 class="widgettitle"><label for="subscribe-field">Email Subscription</label></h4>
+				<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="subscribe-blog">
+											<p>Enter your email address to subscribe to this blog and receive notifications of new posts by email.</p>
+<p>Join 32 other followers</p>
+						<p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Enter your email address" value="" id="subscribe-field"></p>
+					
+					<p>
+						<input type="hidden" name="action" value="subscribe">
+						<input type="hidden" name="blog_id" value="13094777">
+						<input type="hidden" name="source" value="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/">
+						<input type="hidden" name="sub-type" value="widget">
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-3">
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="f53160a503">						<input type="submit" value="Sign me up!">
+					</p>
+				</form>
+			
+</div>		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+							<div style="padding-bottom:15px;width:300px;height:250px;">
+		<div id="atatags-286348-5b43532ba6f2c" style="width: auto; height: auto;"><div style="width: 300px; height: 250px;"><iframe frameborder="0" scrolling="no" width="300" height="250" style="border:none;overflow:hidden;width:300px;height:250px;" src="./svnX用DiffMerge做对比工具_files/saved_resource(15).html"></iframe></div><div id="atatags-286348-5b43532ba6f2c__controls" style="width:300px;height:10px;text-align:right;line-height:6px;"><span id="atatags-286348-5b43532ba6f2c__complain-btn" style="font-size: 10px; color: rgb(109, 171, 210); text-decoration: underline; cursor: pointer; display: inline;">Report this ad</span></div></div></div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!--/sidebar --></div>
+<!--/wrapper -->
+
+<div id="footer">
+	<p class="generator">
+		<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+	</p>
+	<p class="credits">
+			</p>
+</div>
+<!--/footer -->
+
+</div>
+<!--/pagewrapper -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+if(document.getElementById("s")) {
+	document.getElementById("s").onfocus = function() {
+		if (this.value == "Search...")
+			this.value = "";
+	}
+	document.getElementById("s").onblur = function() {
+		if (this.value == '')
+			this.value = "Search...";
+	}
+}
+/* ]]> */
+</script>
+
+<!--  -->
+<script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-4fbfb1ee91b5d96e652811cd0f0e734e">
+	</div>
+	<div class="grofile-hash-map-46215b366734218d5b637d1f4c6d6521">
+	</div>
+	<div class="grofile-hash-map-56cc9bd9f43c2429786891a854fd2198">
+	</div>
+	<div class="grofile-hash-map-540ff118d840aa6df74780cef05cadcf">
+	</div>
+	<div class="grofile-hash-map-a7c9a12431d8ff0663b408b77625ed60">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/mobworld.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/mobworld.wordpress.com\/wp-login.php?action=logout&_wpnonce=c7b106a185","homeURL":"https:\/\/mobworld.wordpress.com\/","postID":"1149","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/saved_resource(6)"></script>
+
+	<div id="carousel-reblog-box">
+		<form action="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post">
+				<input type="hidden" id="carousel-reblog-blog-id" value="13094777">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://mobworld.wordpress.com">
+				<input type="hidden" id="carousel-reblog-blog-title" value="Welcome to Mobile World !!!">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="10fd2ae677"><input type="hidden" name="_wp_http_referer" value="/2012/05/08/svnx-diffmerge-integration/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+<script type="text/javascript" charset="UTF-8" id="polldaddyRatings"><!--//--><![CDATA[//><!--
+PDRTJS_settings_2011092_post_1149={"id":2011092,"unique_id":"wp-post-1149","title":"Integrating%20DiffMerge%20with%26nbsp%3BsvnX","permalink":"https:\/\/mobworld.wordpress.com\/2012\/05\/08\/svnx-diffmerge-integration\/","item_id":"_post_1149"}; if ( typeof PDRTJS_RATING !== 'undefined' ){if ( typeof PDRTJS_2011092_post_1149 == 'undefined' ){PDRTJS_2011092_post_1149 = new PDRTJS_RATING( PDRTJS_settings_2011092_post_1149 );}}
+//--><!]]></script><script type="text/javascript" charset="UTF-8" src="./svnX用DiffMerge做对比工具_files/rating.js"></script>
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/mobworld.wordpress.com\/2012\/05\/08\/svnx-diffmerge-integration\/":1149};
+	</script>
+	
+<link rel="stylesheet" id="all-css-0-3" href="./svnX用DiffMerge做对比工具_files/jetpack-carousel.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"13094777","siteName":"Welcome to Mobile World !!!","siteURL":"http:\/\/mobworld.wordpress.com","icon":"<img alt='' src='https:\/\/s2.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/notepad","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/mobworld.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F","themeURL":"","xhrURL":"https:\/\/mobworld.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"d61b8e2d5b","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"f53160a503\" \/>","referer":"https:\/\/mobworld.wordpress.com\/2012\/05\/08\/svnx-diffmerge-integration\/","canFollow":"1","feedID":"1698157","statusMessage":"","customizeLink":"https:\/\/mobworld.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F","postID":"1149","shortlink":"https:\/\/wp.me\/pSWy5-ix","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/mobworld.wordpress.com\/1149","statsLink":"https:\/\/wordpress.com\/stats\/post\/1149\/mobworld.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Notepad","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 32 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/mobworld.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/mobworld.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"b2e5e37db7","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/mobworld.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F","blog_id":"13094777","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=13094777&v=wpcom&tz=5&user_id=0&subd=mobworld","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/saved_resource(7)"></script><div class="widget widget_eu_cookie_law_widget" style="display: block;"><div class="hide-on-button ads-active" data-hide-timeout="30" data-consent-expiration="180" id="eu-cookie-law">
+	<form method="post">
+		<input type="submit" value="Close and accept" class="accept">
+
+		Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. <br>
+To find out more, including how to control cookies, see here:
+		<a href="https://automattic.com/cookies">
+			Cookie Policy		</a>
+ </form>
+</div>
+</div><div id="actionbar" class="actnbr-pub-notepad actnbr-has-follow"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://mobworld.wordpress.com/"><img alt="" src="./svnX用DiffMerge做对比工具_files/wpcom-gray-white.png" class="avatar avatar-50" height="50" width="50"> Welcome to Mobile World !!!</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://mobworld.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://mobworld.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fmobworld.wordpress.com%2F2012%2F05%2F08%2Fsvnx-diffmerge-integration%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="https://wp.me/pSWy5-ix">Copy shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+</script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "mobworld.wordpress.com";
+	</script>
+	<script type="text/javascript" defer="" src="./svnX用DiffMerge做对比工具_files/725X1342.skimlinks.js"></script>		<iframe src="./svnX用DiffMerge做对比工具_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+<script src="./svnX用DiffMerge做对比工具_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'13094777','blog_tz':'5','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'13094777','v':'wpcom','tz':'5','user_id':'0','post':'1149','subd':'mobworld'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRREQ/V0xPZ1hKXy82Z2xTUHZiTGsyUlpJb3ZdcTVBXzNoUGIuZVtEaFdSdU5scUFSajNHWjQ/Z1Exd083SGp+XXNvOEgrfnZzS1tUOGM1SD9zVT9DMHclSWE9VVctQ0p+cDNHODBlekN6JiYvP3wsfGF4Y2FlLG5zSTUvJkFRMVs1JndNVTJvT2staFBORz9VUU5YLzZuM1o3ZUJ8by5JN18tc3J1fjJpfDgrajNbcXRxeD94T2JGdjhlMTJhOEtEL0dnVj9OUVddRWRjMnIzLUZmajV6SG5McH51W3o3aTlhVFNbSlRDNEkxMHBYQl9pNFM4LlBJY191b2gwdDlGP0hyb3At'}]);
+_stq.push([ 'clickTrackerInit', '13094777', '1149' ]);
+	</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+<div id="sharing_email" style="display: none;">
+		<form action="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="email" name="target_email" id="target_email" value="">
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="">
+
+				<label for="source_email">Your Email Address</label>
+				<input type="email" name="source_email" id="source_email" value="">
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off" title="This field is for validation and should not be changed">
+			
+			<div class="g-recaptcha" data-sitekey="6LcmyE0UAAAAALID28yVNg7pFCodGaArJzHitez_" data-theme="light" data-type="image" data-tabindex="0"><div style="width: 304px; height: 78px;"><div><iframe src="./svnX用DiffMerge做对比工具_files/anchor.html" width="304" height="78" role="presentation" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div>
+			<script type="text/javascript" src="./svnX用DiffMerge做对比工具_files/api.js" async=""></script>
+			
+			<img style="float: right; display: none" class="loading" src="./svnX用DiffMerge做对比工具_files/loading.gif" alt="loading" width="16" height="16">
+			<input type="submit" value="Send Email" class="sharing_send">
+			<a rel="nofollow" href="https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div><div style="background-color: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2); position: absolute; left: 0px; top: -10000px; transition: visibility 0s linear 0.3s, opacity 0.3s linear; opacity: 0; visibility: hidden; z-index: 2000000000;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: #fff; opacity: 0.05;  filter: alpha(opacity=5)"></div><div class="g-recaptcha-bubble-arrow" style="border: 11px solid transparent; width: 0; height: 0; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;"></div><div class="g-recaptcha-bubble-arrow" style="border: 10px solid transparent; width: 0; height: 0; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;"></div><div style="z-index: 2000000000; position: relative;"><iframe title="recaptcha challenge" src="./svnX用DiffMerge做对比工具_files/bframe.html" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox" name="r0atssqru2jq" style="width: 100%; height: 100%;"></iframe></div></div><img src="./svnX用DiffMerge做对比工具_files/g.gif" alt=":)" id="wpstats"></body></html>

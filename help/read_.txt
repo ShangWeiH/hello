@@ -1,0 +1,44 @@
+npm list -g -depth=0
+
+     npm @picgo/picgo-dev
+sudo npm @picgo/picgo-dev
+
+
+npm install @picgo/picgo-dev
+
+
+@picgo/picgo-dev@1.0.6 -> /Users/apple/picgo-dev
+
+
+gifsicle
+node-sass     --unsafe-perm
+node-gyp
+
+
+w2 start
+
+
+npm install -registry=http://npm.gs.sogou-inc.com/
+npm run dev
+cd /Users/apple/Documents/svn/pic-go/webapp/picgo-pic
+
+
+
+
+npm install @picgo/picgo-dev -g --registry=http://npm.gs.sogou-inc.com/
+picgo-dev -V
+picgo-dev -s /Users/apple/Documents/svn/pic-go/webapp/picgo-static-files -n /Users/apple/Documents/svn/pic-go/webapp/picgo-pic --preact --prebuild
+
+pwd
+/usr/local/lib/node_modules/@picgo/picgo-dev
+
+picgo-dev -s /Users/apple/Documents/svn/pic-go/webapp/picgo-static-files -n /Users/apple/Documents/svn/pic-go/webapp/picgo-stu --preact --prebuild
+
+
+
+
+
+
+
+
+pm2 scale picgo-pic 1

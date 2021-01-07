@@ -1,0 +1,9 @@
+linuxs 查找内容命令
+
+grep -r "待查找内容" ./
+
+find . -name a.png       当前目录下查找文件
+find / -name a.png       根目录下查找文件 整个硬盘查找
+
+
+/search/odin/nginx/conf/vhosts/pic.sogou.com.conf

@@ -1,0 +1,9 @@
+https://blog.csdn.net/binglan520/article/details/45172419
+
+
+https://mobworld.wordpress.com/2012/05/08/svnx-diffmerge-integration/
+
+http://blog.tatedavies.com/2015/04/07/svnx-use-diffmerge-as-diff-tool/
+
+
+https://stackoverflow.com/questions/22779104/svnx-not-working-on-mac-its-always-crash-while-opening

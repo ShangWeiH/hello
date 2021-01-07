@@ -1,0 +1,63 @@
+10.153.54.136/pic/upDataSql.jsp
+http://local.pic.sogou.com:10899/pic/upDataSql.jsp
+
+
+
+http://node01.pic.tc.ted:10899/pic/upDataSql.jsp
+
+
+-registry=http://npm.gs.sogou-inc.com/
+			
+
+pic-goͼƬ
+/usr/local/lib/node_modules/@picgo/picgo-dev
+picgo-dev -s /Users/apple/Documents/svn/pic-go/webapp/picgo-static-files -n /Users/apple/Documents/svn/pic-go/webapp/picgo-pic --preact --prebuild
+
+/Users/apple/Documents/svn/pic-go/webapp/picgo-pic
+npm run dev
+
+
+
+
+ʶͼ
+/usr/local/lib/node_modules/@picgo/picgo-dev
+picgo-dev -s /Users/apple/Documents/svn/pic-go/webapp/picgo-static-files -n /Users/apple/Documents/svn/pic-go/webapp/picgo-stu --preact --prebuild
+
+/Users/apple/Documents/svn/pic-go/webapp/picgo-stu
+npm run dev
+
+
+----------
+
+
+AppledeMacBook-Pro-3:pic-pc apple$ cat /etc/hosts
+127.0.0.1	localhost local.pic.sogou.com local.sogou
+
+
+------------
+
+http://local.pic.sogou.com:10898/ris/stu/rf https://pic.sogou.com/ris/stu/rf
+local.pic.sogou.com:10898/ris/stu http://localhost:10898/ris/stu
+
+                                               
+http://local.pic.sogou.com:10898/ris https://pic.sogou.com/ris
+http://local.pic.sogou.com:10898/pic/upload_pic.jsp https://pic.sogou.com/pic/upload_pic.jsp
+http://local.pic.sogou.com:10898/reventondc/indexBuilds https://pic.sogou.com/reventondc/indexBuilds
+http://local.pic.sogou.com:10898/pics/json.jsp https://pic.sogou.com/pics/json.jsp
+http://local.pic.sogou.com:10898/web_sugg https://pic.sogou.com/web_sugg
+
+
+
+
+
+http://local.pic.sogou.com:10899/pics/jsonWithTag2.jsp http://10.160.60.147/pics/jsonWithTag2.jsp
+
+
+http://local.pic.sogou.com:10899/pic/upload_pic.jsp http://pic.sogou.com/pic/upload_pic.jsp
+
+
+http://10.129.43.65:8102/pic/upload_pic.jsp http://pic.sogou.com/pic/upload_pic.jsp
+
+
+
+

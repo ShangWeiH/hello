@@ -1,0 +1,13 @@
+
+
+
+http://10.160.60.147:8081/pic/reload.jsp?key=operation_tag
+http://resin01.pic.tc.ted:8081/pic/reload.jsp?key=operation_tag
+http://ido.sogou/update_pic_resin_data/updatewap.php?key=operation_tag
+http://ido.sogou/ido_frontend/qianyi/newgetconf.php?product=pic&module=resin_picwap&type=host
+
+
+
+http://resin01.pic.tc.ted:8081/pic/download.jsp?v=5&statref=searchlist&keyword=%E7%8E%8B%E4%B8%80%E5%8D%9A&st=255&groupType=c&ssf=index_form_1&index=1#!id=ca86e620b9e623ff-c90007ca74fdae89-8154977e83c183352e5430f729560d87&index=1&type=search
+
+http://resin01.pic.tc.ted:8081/pic/index.jsp?v=5

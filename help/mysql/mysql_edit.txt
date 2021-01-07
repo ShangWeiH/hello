@@ -1,0 +1,40 @@
+mysql> desc sensitive_query;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| sensitive_query | varchar(210) | YES  |     | NULL    |                |
+| id              | int(11)      | NO   | PRI | NULL    | auto_increment |
++-----------------+--------------+------+-----+---------+----------------+
+
+
+
+ALTER TABLE `pic_recommend_image_online` ADD PRIMARY KEY(`id`);
+ALTER TABLE `pic_recommend_image_feed` DROP PRIMARY KEY;
+
+ALTER TABLE nested_template ADD COLUMN id INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE tag_image2 ADD COLUMN id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
+
+alter table album_img drop id;
+
+
+
+
+
+
+
+=======
+
+
+CREATE TABLE tabs_person (tab VARCHAR(210),id INT(11));
+alter table tabs_person drop id;
+ALTER TABLE tabs_person ADD COLUMN id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST
+
+INSERT INTO tabs_person(query,tabs) VALUES("baby","baby sex,baby sex2,baby sex3");
+
+
+
+
+
+
+
+

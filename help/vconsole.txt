@@ -1,0 +1,14 @@
+https://github.com/Tencent/vConsole
+
+<script src="https://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.0.0.0"></script>
+    <script>
+        var vConsole = new VConsole();
+		console.log('Hello world');
+        
+//自动展开console面板
+setTimeout(function () {
+            document.getElementById('__vconsole').className = 'vc-toggle';
+            document.querySelector('.vc-panel').style.display='block';
+        }, 3000);
+
+    </script>
